@@ -9,32 +9,40 @@ function createInstance(imgSrc, description) {
 
     const instance = basicLightbox.create(
         `
-    <div class="modal">
     <img
     class="gallery__image"
     src="${imgSrc}"
     alt="${description}"
     width="800"
     height="600"
-    />
-    </div>`,
+    />`
+   ,
          {
           onShow: (instance) => {
-            paletteContainer.addEventListener("keydown", onEscapeButton);
+            document.addEventListener("keydown", onEscapeButton);
           },
           onClose: (instance) => {
-            paletteContainer.removeEventListener("keydown", onEscapeButton);
+            document.removeEventListener("keydown", onEscapeButton);
           },
         }
       );
       instance.show();
       function onEscapeButton(evt) {
-        if (evt.key === "Escape") {
-          instance.close();
-          return
-        }
-      };
-};
+        if (evt.code === "Escape") {
+            instance.close();
+          }
+          return paletteContainer.removeEventListener;
+        };
+      }
+      
+//     paletteContainer.addEventListener("keydown", (e) => {
+//         if (e.code === "Escape") {
+//           instance.close();
+//         }
+//         return paletteContainer.removeEventListener;
+//       });
+//     }
+// ;
 
 function createGalleryImage(images) {
     return images.map(({preview, original, description}) => {
